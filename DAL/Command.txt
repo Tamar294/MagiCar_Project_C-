@@ -1,3 +1,9 @@
 ﻿
 
-Scaffold-DbContext 'Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="C:\שנה ב\שעורי בית\Project Server C#\Project\DAL\MagiCar.mdf";Integrated Security=True;Connect Timeout=30' Microsoft.EntityFrameworkCore.SqlServer –Context MagiCarContext -OutputDir Models  -Force -NoOnConfiguring
+Scaffold-DbContext 'Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="C:\Users\כהן תמר\Desktop\Project Server C#\Project\DAL\MagiCar.mdf";Integrated Security=True;Connect Timeout=30' Microsoft.EntityFrameworkCore.SqlServer –Context MagiCarContext -OutputDir Models  -Force -NoOnConfiguring
+
+"C:\Users\כהן תמר\Desktop\Project Server C#\Project\DAL\MagiCar.mdf"
+
+Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="C:\Users\כהן תמר\Desktop\Project Server C#\Project\DAL\MagiCar.mdf";Integrated Security=True;Connect Timeout=30
+
+Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="C:\Users\כהן תמר\Desktop\Project Server C#\Project\DAL\MagiCar.mdf";Integrated Security=True;Connect Timeout=30

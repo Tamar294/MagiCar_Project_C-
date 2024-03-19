@@ -9,15 +9,19 @@ public partial class User
 
     public string Name { get; set; }
 
-    public string Password { get; set; }
-
     public string Email { get; set; }
+
+    public string Password { get; set; }
 
     public int PhoneNumber { get; set; }
 
-    public string Address { get; set; }
+    public int AddressId { get; set; }
 
-    public virtual ICollection<FeedBack> FeedBacks { get; set; } = new List<FeedBack>();
+    public int CreditCardId { get; set; }
 
-    public virtual ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
+    public virtual Address Address { get; set; }
+
+    public virtual ICollection<CarsToUser> CarsToUsers { get; set; } = new List<CarsToUser>();
+
+    public virtual CreditDetail CreditCard { get; set; }
 }

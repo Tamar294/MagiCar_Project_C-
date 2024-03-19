@@ -3,15 +3,13 @@ using System.Collections.Generic;
 
 namespace Dal.Models;
 
-public partial class FeedBack
+public partial class CarsToUser
 {
-    public int FeedBackId { get; set; }
+    public int Id { get; set; }
 
     public int UserId { get; set; }
 
-    public string FeedBackContent { get; set; }
-
-    public int? Rating { get; set; }
+    public int CarId { get; set; }
 
     public virtual User User { get; set; }
 }

@@ -28,7 +28,7 @@ namespace Dal.Repo
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                throw new Exception("Failed to add a new user.");
+                throw new Exception("Failed to add a new user🙁");
             }
         }
 
@@ -62,8 +62,8 @@ namespace Dal.Repo
             {
                 Debug.WriteLine(ex.ToString());
                 Debug.WriteLine($"Exception in GetAllAsync: {ex}");
-                throw new Exception("Failed to get all the users.", ex);
-                throw new Exception("Failed to get all the users.");
+                throw new Exception("Failed to get all the users🙁", ex);
+                throw new Exception("Failed to get all the users🙁.");
             }
         }
 
@@ -93,6 +93,7 @@ namespace Dal.Repo
                     user.Email = entity.Email;
                     user.PhoneNumber = entity.PhoneNumber;
                     user.Address = entity.Address;
+                    user.CreditCard = entity.CreditCard;
                 }
                 await context.SaveChangesAsync();
                 return entity;
@@ -100,7 +101,7 @@ namespace Dal.Repo
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                throw new Exception("Failed to update the user.");
+                throw new Exception("Failed to update the user🙁.");
             }
         }
     }

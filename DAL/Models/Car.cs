@@ -7,15 +7,17 @@ public partial class Car
 {
     public int CarId { get; set; }
 
-    public string BrandAndModel { get; set; }
+    public string Company { get; set; }
 
-    public int YearOfManufacture { get; set; }
+    public int AddressId { get; set; }
 
-    public string LicensePlateNumber { get; set; }
+    public int TypeCode { get; set; }
 
-    public string CarStatus { get; set; }
+    public int LockCode { get; set; }
 
-    public virtual ICollection<Maintenance> Maintenances { get; set; } = new List<Maintenance>();
+    public string Image { get; set; }
 
-    public virtual ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
+    public virtual Address Address { get; set; }
+
+    public virtual TypeCar TypeCodeNavigation { get; set; }
 }
