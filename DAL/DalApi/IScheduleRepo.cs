@@ -1,4 +1,4 @@
-﻿using Dal.Interfaces;
+﻿using Dal.DalApi;
 using Dal.Models;
 using System;
 using System.Collections.Generic;

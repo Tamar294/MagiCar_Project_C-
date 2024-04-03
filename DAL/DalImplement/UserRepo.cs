@@ -1,4 +1,4 @@
-﻿using Dal.Interfaces;
+﻿using Dal.DalApi;
 using Dal.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dal.Repo
+namespace Dal.DalImplementations
 {
     public class UserRepo : IUserRepo
     {
@@ -17,13 +17,15 @@ namespace Dal.Repo
         {
             this.context = context;
         }
-        public async Task<User> AddAsync(User entity)
+
+        public User Add(User t)
         {
             try
             {
-                context.Users.Add(entity);
-                await context.SaveChangesAsync();
-                return entity;
+                context.Users.Add(t);
+                context.SaveChanges();
+                return t;
+
             }
             catch (Exception ex)
             {
@@ -32,71 +34,67 @@ namespace Dal.Repo
             }
         }
 
-        public async Task<User> DeleteAsync(int id)
+        public User Delete(int id)
         {
             try
             {
-                User user = await context.Users.FirstOrDefaultAsync(user => user.UserId == id);
-                if (user != null)
-                {
-                    context.Users.Remove(user);
-                }
-                await context.SaveChangesAsync();
-                return user;
-            }
-            catch(Exception ex)
-            {
-                Debug.WriteLine(ex.ToString());
-                throw new Exception($"Failed to delete user {id}.");
-            }
-        }
+                User remove = context.Users.FirstOrDefault(user => user.UserId == id);
+                context.Users.Remove(remove);
+                context.SaveChanges();
+                return remove;
 
-        public async Task<List<User>> GetAllAsync()
-        {
-            try
-            {
-                List<User> users = await context.Users.ToListAsync();
-                return users;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                Debug.WriteLine($"Exception in GetAllAsync: {ex}");
-                throw new Exception("Failed to get all the users🙁", ex);
+                throw new Exception($"Failed to delete user {id}🙁.");
+            }
+        }
+
+        public List<User> GetAll()
+        {
+            try
+            {
+                return context.Users.ToList();
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
                 throw new Exception("Failed to get all the users🙁.");
             }
         }
 
-        public async Task<User> GetSingleAsync(int id)
+        public User GetById(int id)
         {
             try
             {
-                return await context.Users
-                                    .Where(user => user.UserId == id)
-                                    .FirstOrDefaultAsync();                         
+                return context.Users.FirstOrDefault(user => user.UserId == id);
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
                 throw new Exception($"Error in getting a single user {id} data.");
             }
         }
-        public async Task<User> UpdateAsync(User entity)
+
+        public User Update(int id, User t)
         {
             try
             {
-                var user = await context.Users.FindAsync(entity.UserId);
-                if (user != null)
+                User u = context.Users.FirstOrDefault(user => user.UserId == id);
+                if (u != null) 
                 {
-                    user.Name = entity.Name;
-                    user.Password = entity.Password;
-                    user.Email = entity.Email;
-                    user.PhoneNumber = entity.PhoneNumber;
-                    user.Address = entity.Address;
-                    user.CreditCard = entity.CreditCard;
+                    u.Name = t.Name;
+                    u.Email = t.Email;
+                    u.Password = t.Password;
+                    u.Address = t.Address;
+                    u.PhoneNumber = t.PhoneNumber;
+                    u.CreditCard = t.CreditCard;
                 }
-                await context.SaveChangesAsync();
-                return entity;
+                context.SaveChanges();
+                return t;
+
             }
             catch (Exception ex)
             {

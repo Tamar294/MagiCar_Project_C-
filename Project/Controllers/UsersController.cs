@@ -1,6 +1,8 @@
-﻿using Dal.Interfaces;
+﻿using Dal.DalApi;
+using Dal.DalImplementations;
 using Dal.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace Project.Controllers
 {
@@ -15,32 +17,63 @@ namespace Project.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<User>>> GetAll()
+        public ActionResult<List<User>> GetAll()
         {
-            return await userRepo.GetAllAsync();
+            var users = userRepo.GetAll();
+            if (users == null)
+            {
+                return NotFound();
+            }
+            return users;
         }
-        //[HttpGet("~/{id}")]
-        //public async Task<ActionResult<User>> GetById(int id)
+
+        [HttpGet("{id}")]
+        public ActionResult<User> GetById(int id)
+        {
+            User user = userRepo.GetById(id);
+            if(user == null)
+            {
+                return NotFound();
+            }
+            return user;
+            
+
+        }
+
+        [HttpPost]
+        public ActionResult<User> post([FromBody]User user)
+        {
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return user;
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<User> Delete(int id) 
+        {
+            var delete = userRepo.Delete(id);
+            if(delete == null)
+            {
+                return NotFound();
+            }
+            return delete;
+        }
+
+        //[HttpPut("{id}")]
+        //public ActionResult<User> Update([FromBody] string name, [FromBody] string email, [FromBody] string password, [FromBody] int phoneNumber, [FromBody] Address addressId, [FromBody] CreditDetail creditCardId)
         //{
-        //    return await userRepo.FirstOrDefaultAsync(user => user.UserId == id);
-        //}
-        //[HttpPost("{user}")]
-        //public async Task<ActionResult<List<User>>> Post(User user)
-        //{
-        //    return await userRepo.AddAsync(user);
+        //    //User user = userRepo.Update()
+        //    //User user = userRepo.Update(name, email, password, phoneNumber, addressId, creditCardId);
+        //    if(user == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return user;
         //}
 
-        //[HttpPut("{prodId},{product}")]
-        //public void Put(int prodId, Product product)
-        //{
-        //    Products.ProductsList.Remove(Products.ProductsList.FirstOrDefault(p => p.Id == prodId));
-        //    Products.ProductsList.Add(product);
-        //}
 
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult<List<User>>> Delete(int id)
-        //{
-
-        //}
-    }
+    } 
 }
+

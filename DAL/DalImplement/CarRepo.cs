@@ -17,6 +17,12 @@ namespace Dal.DalImplement
         {
             this.context = context;
         }
+
+        public Car Add(Car t)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Car> AddAsync(Car entity)
         {
             try
@@ -32,7 +38,7 @@ namespace Dal.DalImplement
             }
         }
 
-        public async Task<Car> DeleteAsync(int id)
+        public async Task<Car> Delete(int id)
         {
             try
             {
@@ -51,6 +57,11 @@ namespace Dal.DalImplement
             }
         }
 
+        public List<Car> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<Car>> GetAllAsync()
         {
             try
@@ -64,7 +75,7 @@ namespace Dal.DalImplement
             }
         }
 
-        public async Task<Car> GetSingleAsync(int id)
+        public async Task<Car> GetById(int id)
         {
             try
             {
@@ -77,6 +88,11 @@ namespace Dal.DalImplement
                 Debug.WriteLine(ex.ToString());
                 throw new Exception($"Error in getting a single user {id} data🙁");
             }
+        }
+
+        public Car Update(int id, Car t)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Car> UpdateAsync(Car entity)
@@ -98,6 +114,16 @@ namespace Dal.DalImplement
                 Debug.WriteLine(ex.ToString());
                 throw new Exception("Failed to update the user🙁.");
             }
+        }
+
+        Car IRepository<Car>.Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Car IRepository<Car>.GetById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

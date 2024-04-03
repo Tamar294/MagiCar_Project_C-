@@ -1,5 +1,5 @@
 ﻿using Dal.DalApi;
-using Dal.Interfaces;
+using Dal.DalApi;
 using Dal.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +15,10 @@ namespace Project.Controllers
         {
             this.carRepo = carRepo;
         }
-        [HttpGet]
+        /*[HttpGet]
         public async Task<ActionResult<List<Car>>> GetAll()
         {
             return await carRepo.GetAllAsync();
-        }
+        }*/
     }
 }

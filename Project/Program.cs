@@ -1,8 +1,7 @@
 using Dal.DalApi;
 using Dal.DalImplement;
-using Dal.Interfaces;
 using Dal.Models;
-using Dal.Repo;
+using Dal.DalImplementations;
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
 

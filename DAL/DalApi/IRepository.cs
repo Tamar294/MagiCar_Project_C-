@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dal.Interfaces
+namespace Dal.DalApi
 {
     public interface IRepository<T>
     {
-        Task<List<T>> GetAllAsync();
-        Task<T> GetSingleAsync(int id);
-        Task<T> AddAsync(T entity);
-        Task<T> UpdateAsync(T entity);
-        Task<T> DeleteAsync(int id);
+        List<T> GetAll();
+        T GetById(int id);
+        T Add(T t);
+        T Update(int id, T t);
+        T Delete(int id);
     }
 }

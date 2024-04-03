@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dal.Interfaces
+namespace Dal.DalApi
 {
     public interface IUserRepo : IRepository<User>
     {
