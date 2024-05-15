@@ -1,4 +1,4 @@
-﻿/*using Dal.DalApi;
+﻿using Dal.Api;
 using Dal.Models;
 using System;
 using System.Collections.Generic;
@@ -6,10 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dal.DalApi
+namespace Dal.Api
 {
-    public interface ITypeCars : IRepository<TypeCar>
+    public interface ICarsToUsersRepo : IRepository<CarsToUser>
     {
     }
 }
-*/

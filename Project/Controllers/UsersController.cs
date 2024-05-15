@@ -1,4 +1,4 @@
-﻿using Dal.DalApi;
+﻿using Dal.Api;
 using Dal.DalImplementations;
 using Dal.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -61,12 +61,22 @@ namespace Project.Controllers
             return delete;
         }
 
+        [HttpPut("{id}")]
+        public ActionResult<User> Update([FromBody] User user)
+        {
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return user;
+        }
+
         //[HttpPut("{id}")]
         //public ActionResult<User> Update([FromBody] string name, [FromBody] string email, [FromBody] string password, [FromBody] int phoneNumber, [FromBody] Address addressId, [FromBody] CreditDetail creditCardId)
         //{
         //    //User user = userRepo.Update()
         //    //User user = userRepo.Update(name, email, password, phoneNumber, addressId, creditCardId);
-        //    if(user == null)
+        //    if (user == null)
         //    {
         //        return NotFound();
         //    }

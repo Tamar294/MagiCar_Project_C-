@@ -1,14 +1,13 @@
-﻿using Dal.DalApi;
-using Dal.Models;
+﻿using Dal.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dal.DalApi
+namespace Dal.Api
 {
-    public interface IAddressRepo : IRepository<Address>
+    public interface ITypeCarRepo : IRepository<TypeCar>
     {
     }
 }

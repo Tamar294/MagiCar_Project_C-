@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dal.DalApi
+namespace Bl.Api
 {
-    public interface IUserRepo : IRepository<User>
+    public interface IUserService: IService<User>
     {
     }
 }

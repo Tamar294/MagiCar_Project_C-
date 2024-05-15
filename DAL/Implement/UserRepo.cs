@@ -1,4 +1,4 @@
-﻿using Dal.DalApi;
+﻿using Dal.Api;
 using Dal.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dal.DalImplementations
+namespace Dal.Implement
 {
     public class UserRepo : IUserRepo
     {
@@ -83,7 +83,7 @@ namespace Dal.DalImplementations
             try
             {
                 User u = context.Users.FirstOrDefault(user => user.UserId == id);
-                if (u != null) 
+                if (u != null)
                 {
                     u.Name = t.Name;
                     u.Email = t.Email;
