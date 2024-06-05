@@ -7,7 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Implement\" />
+    <Compile Remove="Api\**" />
+    <Compile Remove="DTO\**" />
+    <Compile Remove="Implement\**" />
+    <EmbeddedResource Remove="Api\**" />
+    <EmbeddedResource Remove="DTO\**" />
+    <EmbeddedResource Remove="Implement\**" />
+    <None Remove="Api\**" />
+    <None Remove="DTO\**" />
+    <None Remove="Implement\**" />
   </ItemGroup>
 
   <ItemGroup>

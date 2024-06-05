@@ -11,8 +11,13 @@ namespace Bl.DTO
 {
     public class AddressDTO
     {
-        public AddressDTO(int Id, string City, string Neighborhood, string Street, int BuildingNumber , ICollection<Car> Cars, ICollection<User> Users) {
-        this.Id = Id;   
+        public AddressDTO(Address address)
+        {
+        }
+
+        public AddressDTO(int Id, string City, string Neighborhood, string Street, int BuildingNumber , ICollection<Car> Cars, ICollection<User> Users)
+        {
+            this.Id = Id;   
             this.City = City;
             this.Neighborhood = Neighborhood;
             this.Street = Street;

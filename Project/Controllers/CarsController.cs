@@ -1,5 +1,4 @@
 ﻿using Dal.Api;
-using Dal.DalImplementations;
 using Dal.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -39,13 +38,13 @@ namespace Project.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Car> post([FromBody] Car car)
+        public ActionResult<Car> Post([FromBody] Car car)
         {
             if (car == null)
             {
                 return NotFound();
             }
-            return car;
+            return carRepo.Add(car);
         }
 
         [HttpDelete("{id}")]
@@ -59,14 +58,14 @@ namespace Project.Controllers
             return delete;
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public ActionResult<Car> Update([FromBody] Car car)
         {
             if (car == null)
             {
                 return NotFound();
             }
-            return car;
+            return carRepo.Update(car);
         }
     }
 }

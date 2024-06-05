@@ -1,8 +1,10 @@
 ﻿using Dal.Api;
-using Dal.DalImplementations;
 using Dal.Models;
+//using Bl.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+//using Bl.Api;
+//using Bl.Implement;
 
 namespace Project.Controllers
 {
@@ -10,27 +12,42 @@ namespace Project.Controllers
     [ApiController]
     public class AddressesController : ControllerBase
     {
-        IAddressRepo adrressRepo;
-        public AddressesController (IAddressRepo adrressRepo)
+        IAddressRepo addressRepo;
+        public AddressesController(IAddressRepo addressRepo)
         {
-            this.adrressRepo = adrressRepo;
+            this.addressRepo = addressRepo;
         }
+        //private readonly IAddressService addressService;
+        //public AddressesController(IAddressService addressService)
+        //{
+        //    this.addressService = addressService;
+        //}
 
         [HttpGet]
         public ActionResult<List<Address>> GetAll()
         {
-            var addresses = adrressRepo.GetAll();
+            var addresses = addressRepo.GetAll();
             if (addresses == null)
             {
                 return NotFound();
             }
             return addresses;
         }
+        //[HttpGet]
+        //public ActionResult<List<AddressDTO>> GetAll()
+        //{
+        //    var addresses = addressService.GetAll();
+        //    if (addresses == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return addresses;
+        //}
 
         [HttpGet("{id}")]
         public ActionResult<Address> GetById(int id)
         {
-            Address address = adrressRepo.GetById(id);
+            Address address = addressRepo.GetById(id);
             if (address == null)
             {
                 return NotFound();
@@ -39,19 +56,19 @@ namespace Project.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Address> post([FromBody] Address address)
+        public ActionResult<Address> Post([FromBody] Address address)
         {
             if (address == null)
             {
                 return NotFound();
             }
-            return address;
+            return addressRepo.Add(address);
         }
 
         [HttpDelete("{id}")]
         public ActionResult<Address> Delete(int id)
         {
-            var delete = adrressRepo.Delete(id);
+            var delete = addressRepo.Delete(id);
             if (delete == null)
             {
                 return NotFound();
@@ -59,14 +76,14 @@ namespace Project.Controllers
             return delete;
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public ActionResult<Address> Update([FromBody] Address address)
         {
             if (address == null)
             {
                 return NotFound();
             }
-            return address;
+            return addressRepo.Update(address);
         }
     }
 }

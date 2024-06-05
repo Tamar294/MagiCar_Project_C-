@@ -11,7 +11,7 @@ namespace Dal.Api
         List<T> GetAll();
         T GetById(int id);
         T Add(T t);
-        T Update(int id, T t);
+        T Update( T t);
         T Delete(int id);
     }
 }

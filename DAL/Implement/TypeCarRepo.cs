@@ -78,11 +78,11 @@ namespace Dal.Implement
             }
         }
 
-        public TypeCar Update(int id, TypeCar t)
+        public TypeCar Update(TypeCar t)
         {
             try
             {
-                TypeCar typeCar = context.TypeCars.FirstOrDefault(typeCar => typeCar.Id == id);
+                TypeCar typeCar = context.TypeCars.FirstOrDefault(typeCar => typeCar.Id == t.Id);
                 if (typeCar != null)
                 {
                     typeCar.Name = t.Name;

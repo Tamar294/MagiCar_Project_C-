@@ -53,12 +53,22 @@ public class CarRepo : ICarRepo
     {
         try
         {
-            return context.Cars.ToList();
+            List<Car> list = context.Cars.ToList();
+            foreach (var car in list) 
+            {
+                car.AddressCode = context.Addresses.FirstOrDefault(add => add.Id == car.AddressCode).Id;
+
+            }
+            foreach (var car in list)
+            {
+                car.TypeCodeNavigation = context.TypeCars.FirstOrDefault(type => type.Id == car.TypeCode);
+            }
+            return list;
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.ToString());
-            throw new Exception("Failed to get all the cars🙁.");
+            throw new Exception(ex.ToString());
         }
     }
 
@@ -75,18 +85,20 @@ public class CarRepo : ICarRepo
         }
     }
 
-    public Car Update(int id, Car c)
+    public Car Update(Car c)
     {
         try
         {
-            Car car = context.Cars.FirstOrDefault(car => car.CarId == id);
+            Car car = context.Cars.FirstOrDefault(car => car.CarId == c.CarId);
             if (car != null)
             {
                 car.Company = c.Company;
-                car.AddressId = c.AddressId;
+                car.AddressCode = c.AddressCode;
                 car.TypeCode = c.TypeCode;
                 car.LockCode = c.LockCode;
-                car.Image = c.Image;
+                car.ImageAvailable = c.ImageAvailable;
+                car.ImagePartiallyAvailable = c.ImagePartiallyAvailable;
+                car.ImageNotAvailable = c.ImageNotAvailable;
             }
             context.SaveChanges();
             return c;

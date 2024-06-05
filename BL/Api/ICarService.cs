@@ -1,4 +1,5 @@
-﻿using Dal.Models;
+﻿using Bl.DTO;
+using Dal.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Bl.Api
 {
-    public interface ICarService: IService<Car>
+    public interface ICarService: IService<CarDTO>
     {
     }
 }

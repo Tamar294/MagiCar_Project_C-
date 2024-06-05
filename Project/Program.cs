@@ -1,9 +1,10 @@
 using Dal.Api;
-using Dal.DalImplement;
 using Dal.Models;
-using Dal.DalImplementations;
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
+using Dal.Implement;
+//using Bl.Api;
+//using Bl.Implement;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,10 +15,11 @@ var connString = actions.GetConnectionString("MagiCarDB");
 builder.Services.AddDbContext<MagiCarContext>((options) => options.UseSqlServer(connString));
 
 builder.Services.AddScoped<IAddressRepo, AddressRepo>();
+//builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<ICarRepo, CarRepo>();
-builder.Services.AddScoped<ICarsToUsersRepo, CarsToUsersRepo>();
-builder.Services.AddScoped<ICreditDetailRepo, CreditDetailRepo>();
-builder.Services.AddScoped<IScheduleRepo, ScheduleRepo>();
+builder.Services.AddScoped<ICarRentalRepo, CarRentalRepo>();
+builder.Services.AddScoped<IPayDetailRepo, PayDetailRepo>();
+builder.Services.AddScoped<IRentalHistoryRepo, RentalHistoryRepo>();
 builder.Services.AddScoped<ITypeCarRepo, TypeCarRepo>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 

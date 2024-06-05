@@ -15,13 +15,15 @@ public partial class User
 
     public int PhoneNumber { get; set; }
 
-    public int AddressId { get; set; }
+    public int AddressCode { get; set; }
 
-    public int CreditCardId { get; set; }
+    public int PaymentCode { get; set; }
 
-    public virtual Address Address { get; set; }
+    public virtual Address AddressCodeNavigation { get; set; }
 
-    public virtual ICollection<CarsToUser> CarsToUsers { get; set; } = new List<CarsToUser>();
+    public virtual ICollection<CarsRental> CarsRentals { get; set; } = new List<CarsRental>();
 
-    public virtual CreditDetail CreditCard { get; set; }
+    public virtual PayDetail PaymentCodeNavigation { get; set; }
+
+    public virtual ICollection<RentalHistory> RentalHistories { get; set; } = new List<RentalHistory>();
 }
