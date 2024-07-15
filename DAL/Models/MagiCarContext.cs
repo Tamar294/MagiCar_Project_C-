@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Dal.Models;
 
@@ -19,11 +17,11 @@ public partial class MagiCarContext : DbContext
 
     public virtual DbSet<Car> Cars { get; set; }
 
-    public virtual DbSet<CarsToUser> CarsToUsers { get; set; }
+    public virtual DbSet<CarsRental> CarsRentals { get; set; }
 
-    public virtual DbSet<CreditDetail> CreditDetails { get; set; }
+    public virtual DbSet<PayDetail> PayDetails { get; set; }
 
-    public virtual DbSet<Schedule> Schedules { get; set; }
+    public virtual DbSet<RentalHistory> RentalHistories { get; set; }
 
     public virtual DbSet<TypeCar> TypeCars { get; set; }
 
@@ -31,7 +29,7 @@ public partial class MagiCarContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\כהן תמר\\Desktop\\Project\\DAL\\MagiCar.mdf\";Integrated Security=True;Connect Timeout=30");
+        => optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\שנה ב\\שעורי בית\\PROJECT MEGICAR\\04.07.24\\PROJECT\\DAL\\MAGICAR.MDF\"; Integrated Security=True;Connect Timeout=30");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -41,35 +39,35 @@ public partial class MagiCarContext : DbContext
 
             entity.Property(e => e.City)
                 .IsRequired()
-                .HasMaxLength(50)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
-            entity.Property(e => e.Neighborhood)
-                .HasMaxLength(50)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
+                .HasMaxLength(50);
+            entity.Property(e => e.Neighborhood).HasMaxLength(50);
             entity.Property(e => e.Street)
                 .IsRequired()
-                .HasMaxLength(50)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
+                .HasMaxLength(50);
         });
 
         modelBuilder.Entity<Car>(entity =>
         {
-            entity.HasKey(e => e.CarId).HasName("PK__Cars__68A0342EB202EAB8");
+            entity.HasKey(e => e.CarId).HasName("PK__Cars__68A0342EE9CFC4FA");
 
             entity.Property(e => e.Company)
                 .IsRequired()
-                .HasMaxLength(50)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
-            entity.Property(e => e.Image)
+                .HasMaxLength(50);
+            entity.Property(e => e.ImageAvailable)
                 .IsRequired()
-                .HasMaxLength(50)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
+                .HasMaxLength(50);
+            entity.Property(e => e.ImageNotAvailable)
+                .IsRequired()
+                .HasMaxLength(50);
+            entity.Property(e => e.ImagePartiallyAvailable)
+                .IsRequired()
+                .HasMaxLength(50);
             entity.Property(e => e.LockCode).HasColumnName("lockCode");
 
-            entity.HasOne(d => d.Address).WithMany(p => p.Cars)
-                .HasForeignKey(d => d.AddressId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Cars_TO_Addresses");
+            //entity.HasOne(d => d.AddressCodeNavigation).WithMany(p => p.Cars)
+            //    .HasForeignKey(d => d.AddressCode)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_Cars_TO_Addresses");
 
             entity.HasOne(d => d.TypeCodeNavigation).WithMany(p => p.Cars)
                 .HasForeignKey(d => d.TypeCode)
@@ -77,45 +75,62 @@ public partial class MagiCarContext : DbContext
                 .HasConstraintName("FK_Cars_TO_TypeCars");
         });
 
-        modelBuilder.Entity<CarsToUser>(entity =>
+        modelBuilder.Entity<CarsRental>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__CarsToUs__3214EC07E84A3C97");
+            entity.HasKey(e => e.Id).HasName("PK__CarsRent__3214EC07514141B1");
 
-            entity.HasOne(d => d.User).WithMany(p => p.CarsToUsers)
-                .HasForeignKey(d => d.UserId)
+            entity.ToTable("CarsRental");
+
+            entity.Property(e => e.EndTime).HasColumnType("datetime");
+            entity.Property(e => e.StartTime).HasColumnType("datetime");
+
+            entity.HasOne(d => d.CarCodeNavigation).WithMany(p => p.CarsRentals)
+                .HasForeignKey(d => d.CarCode)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_CarsToUsers_TO_Users");
+                .HasConstraintName("FK_CarsRental_TO_Cars");
+
+            entity.HasOne(d => d.UserCodeNavigation).WithMany(p => p.CarsRentals)
+                .HasForeignKey(d => d.UserCode)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_CarsRental_TO_Users");
         });
 
-        modelBuilder.Entity<CreditDetail>(entity =>
+        modelBuilder.Entity<PayDetail>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__CreditDe__3214EC0743E4906F");
+            entity.HasKey(e => e.Id).HasName("PK__PayDetai__3214EC07E5C9F4FD");
 
             entity.Property(e => e.Cvv)
                 .IsRequired()
                 .HasMaxLength(10)
                 .IsFixedLength()
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS")
                 .HasColumnName("CVV");
             entity.Property(e => e.Number)
                 .IsRequired()
-                .HasMaxLength(50)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
+                .HasMaxLength(50);
             entity.Property(e => e.Validity)
                 .IsRequired()
                 .HasMaxLength(10)
-                .IsFixedLength()
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
+                .IsFixedLength();
         });
 
-        modelBuilder.Entity<Schedule>(entity =>
+        modelBuilder.Entity<RentalHistory>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Schedule__3214EC07620C39D7");
+            entity.HasKey(e => e.Id).HasName("PK__RentalHi__3214EC0769CDE12E");
 
-            entity.ToTable("Schedule");
+            entity.ToTable("RentalHistory");
 
-            entity.Property(e => e.EndDate).HasColumnType("datetime");
-            entity.Property(e => e.StartDate).HasColumnType("datetime");
+            entity.Property(e => e.EndTime).HasColumnType("datetime");
+            entity.Property(e => e.StartTime).HasColumnType("datetime");
+
+            entity.HasOne(d => d.CarCodeNavigation).WithMany(p => p.RentalHistories)
+                .HasForeignKey(d => d.CarCode)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_RentalHistory_TO_Cars");
+
+            entity.HasOne(d => d.UserCodeNavigation).WithMany(p => p.RentalHistories)
+                .HasForeignKey(d => d.UserCode)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_RentalHistory_TO_Users");
         });
 
         modelBuilder.Entity<TypeCar>(entity =>
@@ -124,37 +139,33 @@ public partial class MagiCarContext : DbContext
 
             entity.Property(e => e.Name)
                 .IsRequired()
-                .HasMaxLength(50)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
+                .HasMaxLength(50);
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CC4CF7F4A4A6");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CC4C27033F6B");
 
             entity.Property(e => e.Email)
                 .IsRequired()
-                .HasMaxLength(50)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
+                .HasMaxLength(50);
             entity.Property(e => e.Name)
                 .IsRequired()
-                .HasMaxLength(50)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
+                .HasMaxLength(50);
             entity.Property(e => e.Password)
                 .IsRequired()
                 .HasMaxLength(10)
-                .IsFixedLength()
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
+                .IsFixedLength();
 
-            entity.HasOne(d => d.Address).WithMany(p => p.Users)
-                .HasForeignKey(d => d.AddressId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Users_TO_Addresses");
+            //entity.HasOne(d => d.AddressCodeNavigation).WithMany(p => p.Users)
+            //    .HasForeignKey(d => d.AddressCode)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_Users_TO_Addresses");
 
-            entity.HasOne(d => d.CreditCard).WithMany(p => p.Users)
-                .HasForeignKey(d => d.CreditCardId)
+            entity.HasOne(d => d.PaymentCodeNavigation).WithMany(p => p.Users)
+                .HasForeignKey(d => d.PaymentCode)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Users_TO_CreditDetails");
+                .HasConstraintName("FK_Users_TO_PayDetails");
         });
 
         OnModelCreatingPartial(modelBuilder);

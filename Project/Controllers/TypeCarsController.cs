@@ -40,13 +40,13 @@ namespace Project.Controllers
         }
 
         [HttpPost]
-        public ActionResult<TypeCar> post([FromBody] TypeCar typeCar)
+        public ActionResult<TypeCar> Post([FromBody] TypeCar typeCar)
         {
             if (typeCar == null)
             {
                 return NotFound();
             }
-            return typeCar;
+            return typeCarRepo.Add(typeCar);
         }
 
         [HttpDelete("{id}")]
@@ -60,14 +60,14 @@ namespace Project.Controllers
             return delete;
         }
 
-        [HttpPut("{id}")]
-        public ActionResult<TypeCar> Update([FromBody] TypeCar typeCar)
+        [HttpPut]
+        public ActionResult<TypeCar> Update([FromBody] TypeCar typeCar, int id)
         {
             if (typeCar == null)
             {
                 return NotFound();
             }
-            return typeCar;
+            return typeCarRepo.Update(typeCar, id);
         }
     }
 }

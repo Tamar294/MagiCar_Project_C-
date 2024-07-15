@@ -1,5 +1,4 @@
 ﻿using Dal.Api;
-using Dal.DalImplementations;
 using Dal.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -41,13 +40,13 @@ namespace Project.Controllers
         }
 
         [HttpPost]
-        public ActionResult<User> post([FromBody]User user)
+        public ActionResult<User> Post([FromBody]User user)
         {
             if (user == null)
             {
                 return NotFound();
             }
-            return user;
+            return userRepo.Add(user);
         }
 
         [HttpDelete("{id}")]
@@ -61,14 +60,14 @@ namespace Project.Controllers
             return delete;
         }
 
-        [HttpPut("{id}")]
-        public ActionResult<User> Update([FromBody] User user)
+        [HttpPut]
+        public ActionResult<User> Update([FromBody] User user, int id)
         {
             if (user == null)
             {
                 return NotFound();
             }
-            return user;
+            return userRepo.Update(user, id);
         }
 
         //[HttpPut("{id}")]

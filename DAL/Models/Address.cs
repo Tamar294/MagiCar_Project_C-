@@ -15,7 +15,7 @@ public partial class Address
 
     public int BuildingNumber { get; set; }
 
-    public virtual ICollection<Car> Cars { get; set; } = new List<Car>();
+    //    public virtual ICollection<Car> Cars { get; set; } = new List<Car>();
 
-    public virtual ICollection<User> Users { get; set; } = new List<User>();
+    //    public virtual ICollection<User> Users { get; set; } = new List<User>();
 }

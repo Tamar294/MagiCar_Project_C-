@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Dal.Api
 {
-    public interface ICreditDetailRepo : IRepository<CreditDetail>
+    public interface IPayDetailRepo : IRepository<PayDetail>
     {
     }
 }

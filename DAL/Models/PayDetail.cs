@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Dal.Models;
 
-public partial class CreditDetail
+public partial class PayDetail
 {
     public int Id { get; set; }
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Dal.Api
 {
-    public interface ICarsToUsersRepo : IRepository<CarsToUser>
+    public interface ICarRentalRepo : IRepository<CarsRental>
     {
     }
 }

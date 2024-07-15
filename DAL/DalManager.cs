@@ -1,6 +1,5 @@
 ﻿using Dal.Api;
-using Dal.DalImplement;
-using Dal.DalImplementations;
+using Dal.Implement;
 using Dal.Models;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -13,13 +12,21 @@ namespace Dal
 {
     public class DalManager
     {
+        public AddressRepo addressRepo;
+        public CarRepo carRepo;
+        public CarRentalRepo carRentalRepo;
+        public PayDetailRepo payDetailRepo;
+        public RentalHistoryRepo rentalHistoryRepo;
+        public TypeCarRepo typeCarRepo;
+        public UserRepo userRepo;
+
         public UserRepo user { get; }
         public CarRepo car { get; }
         public AddressRepo address { get; }
-        public CreditDetailRepo creditDetail { get; }
-        public ScheduleRepo schedule { get; }
+        public PayDetailRepo payDetail { get; }
+        public CarRentalRepo carRental { get; }
         public TypeCarRepo typeCar { get; }
-        public CarsToUsersRepo carsToUsers { get; }
+        public RentalHistoryRepo rentalHistory { get; }
 
         public DalManager()
         {
@@ -31,10 +38,10 @@ namespace Dal
             services.AddScoped<IRepository<User>, UserRepo>();
             services.AddScoped<IRepository<Car>, CarRepo>();
             services.AddScoped<IRepository<Address>, AddressRepo>();
-            services.AddScoped<IRepository<CreditDetail>, CreditDetailRepo>();
-            services.AddScoped<IRepository<Schedule>, ScheduleRepo>();
+            services.AddScoped<IRepository<PayDetail>, PayDetailRepo>();
+            services.AddScoped<IRepository<CarsRental>, CarRentalRepo>();
             services.AddScoped<IRepository<TypeCar>, TypeCarRepo>();
-            services.AddScoped<IRepository<CarsToUser>, CarsToUsersRepo>();
+            services.AddScoped<IRepository<RentalHistory>, RentalHistoryRepo>();
             
             // הגדרת מנהל למחלקות השרות שנקרא פרווידר
             ServiceProvider serviceProvider = services.BuildServiceProvider();
@@ -42,10 +49,11 @@ namespace Dal
             user = serviceProvider.GetRequiredService<UserRepo>();
             car = serviceProvider.GetRequiredService<CarRepo>();
             address = serviceProvider.GetRequiredService<AddressRepo>();
-            creditDetail = serviceProvider.GetRequiredService<CreditDetailRepo>();
-            schedule = serviceProvider.GetRequiredService<ScheduleRepo>();
+            payDetail = serviceProvider.GetRequiredService<PayDetailRepo>();
+            carRental = serviceProvider.GetRequiredService<CarRentalRepo>();
             typeCar = serviceProvider.GetRequiredService<TypeCarRepo>();
-            carsToUsers = serviceProvider.GetRequiredService<CarsToUsersRepo>();
+            rentalHistory = serviceProvider.GetRequiredService<RentalHistoryRepo>();
+      
         }
     }
 }

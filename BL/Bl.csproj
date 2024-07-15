@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Implement\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DAL\Dal.csproj" />
   </ItemGroup>
 

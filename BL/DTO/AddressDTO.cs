@@ -11,8 +11,13 @@ namespace Bl.DTO
 {
     public class AddressDTO
     {
-        public AddressDTO(int Id, string City, string Neighborhood, string Street, int BuildingNumber , ICollection<Car> Cars, ICollection<User> Users) {
-        this.Id = Id;   
+        public AddressDTO(Address address)
+        {
+        }
+
+        public AddressDTO(int Id, string City, string Neighborhood, string Street, int BuildingNumber , ICollection<Car> Cars, ICollection<User> Users)
+        {
+            this.Id = Id;   
             this.City = City;
             this.Neighborhood = Neighborhood;
             this.Street = Street;
@@ -30,8 +35,8 @@ namespace Bl.DTO
 
         public int BuildingNumber { get; set; }
 
-        public virtual ICollection<Car> Cars { get; set; } = new List<Car>();
+        //public virtual ICollection<Car> Cars { get; set; } = new List<Car>();
 
-        public virtual ICollection<User> Users { get; set; } = new List<User>();
+        //public virtual ICollection<User> Users { get; set; } = new List<User>();
     }
 }

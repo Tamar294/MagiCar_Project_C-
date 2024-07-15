@@ -1,12 +1,6 @@
 ﻿using Dal.Api;
 using Dal.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dal.Implement
 {
@@ -18,13 +12,13 @@ namespace Dal.Implement
             this.context = context;
         }
 
-        public User Add(User t)
+        public User Add(User u)
         {
             try
             {
-                context.Users.Add(t);
+                context.Users.Add(u);
                 context.SaveChanges();
-                return t;
+                return u;
 
             }
             catch (Exception ex)
@@ -55,13 +49,18 @@ namespace Dal.Implement
         {
             try
             {
-                return context.Users.ToList();
+                List<User> users = context.Users.ToList();
+                foreach (var user in users)
+                {
+                    user.AddressCode = context.Addresses.FirstOrDefault(add => add.Id == user.AddressCode).Id;
+                }
+                return users;
 
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                throw new Exception("Failed to get all the users🙁.");
+                throw new Exception(ex.ToString());
             }
         }
 
@@ -78,19 +77,19 @@ namespace Dal.Implement
             }
         }
 
-        public User Update(int id, User t)
+        public User Update(User t, int id)
         {
             try
             {
-                User u = context.Users.FirstOrDefault(user => user.UserId == id);
+                User u = context.Users.FirstOrDefault(user => user.UserId == t.UserId);
                 if (u != null)
                 {
                     u.Name = t.Name;
                     u.Email = t.Email;
                     u.Password = t.Password;
-                    u.Address = t.Address;
                     u.PhoneNumber = t.PhoneNumber;
-                    u.CreditCard = t.CreditCard;
+                    u.AddressCode = t.AddressCode;
+                    u.PaymentCode = t.PaymentCode;
                 }
                 context.SaveChanges();
                 return t;

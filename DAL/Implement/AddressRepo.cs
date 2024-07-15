@@ -77,7 +77,7 @@ public class AddressRepo : IAddressRepo
         }
     }
 
-    public Address Update(int id, Address a)
+    public Address Update(Address a, int id)
     {
         try
         {
