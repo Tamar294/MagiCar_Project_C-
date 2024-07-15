@@ -61,13 +61,21 @@ namespace Project.Controllers
         }
 
         [HttpPut]
+<<<<<<< HEAD
         public ActionResult<User> Update([FromBody] User user, int id)
+=======
+        public ActionResult<User> Update([FromBody] User user)
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
         {
             if (user == null)
             {
                 return NotFound();
             }
+<<<<<<< HEAD
             return userRepo.Update(user, id);
+=======
+            return userRepo.Update(user);
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
         }
 
         //[HttpPut("{id}")]

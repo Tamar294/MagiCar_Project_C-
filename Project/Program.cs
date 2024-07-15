@@ -3,7 +3,10 @@ using Dal.Models;
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Dal.Implement;
+<<<<<<< HEAD
 using System.Diagnostics;
+=======
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
 //using Bl.Api;
 //using Bl.Implement;
 

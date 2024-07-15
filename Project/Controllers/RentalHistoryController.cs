@@ -60,13 +60,21 @@ namespace Project.Controllers
         }
 
         [HttpPut]
+<<<<<<< HEAD
         public ActionResult<RentalHistory> Update([FromBody] RentalHistory rentalHistory, int id)
+=======
+        public ActionResult<RentalHistory> Update([FromBody] RentalHistory rentalHistory)
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
         {
             if (rentalHistory == null)
             {
                 return NotFound();
             }
+<<<<<<< HEAD
             return rentalHistoryRepo.Update(rentalHistory, id);
+=======
+            return rentalHistoryRepo.Update(rentalHistory);
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
         }
     }
 }

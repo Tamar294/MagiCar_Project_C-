@@ -77,11 +77,15 @@ public class AddressRepo : IAddressRepo
         }
     }
 
+<<<<<<< HEAD
     public Address Update(Address a, int id)
+=======
+    public Address Update(Address a)
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
     {
         try
         {
-            Address address = context.Addresses.FirstOrDefault(address => address.Id == id);
+            Address address = context.Addresses.FirstOrDefault(address => address.Id == a.Id);
             if (address != null)
             {
                 a.City = address.City;

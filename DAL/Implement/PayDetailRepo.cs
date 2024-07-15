@@ -77,7 +77,11 @@ public class PayDetailRepo: IPayDetailRepo
         }
     }
 
+<<<<<<< HEAD
     public PayDetail Update(PayDetail p, int id)
+=======
+    public PayDetail Update(PayDetail p)
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
     {
         try
         {

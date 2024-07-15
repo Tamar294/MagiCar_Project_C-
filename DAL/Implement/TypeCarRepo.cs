@@ -78,7 +78,11 @@ namespace Dal.Implement
             }
         }
 
+<<<<<<< HEAD
         public TypeCar Update(TypeCar t, int id)
+=======
+        public TypeCar Update(TypeCar t)
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
         {
             try
             {

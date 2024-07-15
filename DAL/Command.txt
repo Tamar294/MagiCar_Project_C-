@@ -11,6 +11,10 @@ Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="H:\07052024 project\Project
 
 Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="H:\07052024 project\Project\DAL\MagiCar.mdf";Integrated Security=True;Connect Timeout=30
 
+<<<<<<< HEAD
 Scaffold-DbContext 'Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="H:\07052024 project\Project\DAL\MagiCar.mdf";Integrated Security=True;Connect Timeout=30' Microsoft.EntityFrameworkCore.SqlServer –Context MagiCarContext -OutputDir Models  -Force 
 
 Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="H:\07052024 project\Project\DAL\MagiCar.mdf";Integrated Security=True;Connect Timeout=30
+=======
+Scaffold-DbContext 'Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="H:\07052024 project\Project\DAL\MagiCar.mdf";Integrated Security=True;Connect Timeout=30' Microsoft.EntityFrameworkCore.SqlServer –Context MagiCarContext -OutputDir Models  -Force -NoOnConfiguring
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394

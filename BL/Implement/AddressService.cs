@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿//using Bl.Api;
 //using Bl.DTO;
 //using Dal;
@@ -96,6 +97,9 @@
 //    }
 //}
 using Bl.Api;
+=======
+﻿using Bl.Api;
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
 using Bl.DTO;
 using Dal;
 using Dal.Implement;
@@ -110,6 +114,7 @@ namespace Bl.Implement
 {
     public class AddressService : IAddressService
     {
+<<<<<<< HEAD
         private readonly AddressRepo addresses;
 
         public AddressService(DalManager manager)
@@ -151,10 +156,27 @@ namespace Bl.Implement
                 Console.WriteLine($"Error deleting address: {ex.Message}");
                 return null;
             }
+=======
+        AddressRepo addresses;
+        public AddressService(DalManager manager)
+        {
+            this.addresses = manager.addressRepo;
+        }
+
+        public AddressDTO Add(AddressDTO t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AddressDTO Delete(int Id)
+        {
+            throw new NotImplementedException();
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
         }
 
         public List<AddressDTO> GetAll()
         {
+<<<<<<< HEAD
             try
             {
                 List<Address> addressList = addresses.GetAll();
@@ -165,10 +187,20 @@ namespace Bl.Implement
                 Console.WriteLine($"Error getting all addresses: {ex.Message}");
                 return null;
             }
+=======
+            List<Address> listDal = addresses.GetAll();
+            List<AddressDTO> listDTO = new List<AddressDTO>();
+            foreach(Address address in listDal)
+            {
+                listDTO.Add(new AddressDTO(address));
+            }
+            return listDTO;
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
         }
 
         public AddressDTO GetByID(int id)
         {
+<<<<<<< HEAD
             try
             {
                 Address address = addresses.GetById(id);
@@ -208,3 +240,14 @@ namespace Bl.Implement
     }
 }
 
+=======
+            throw new NotImplementedException();
+        }
+
+        public AddressDTO Update(int Id, AddressDTO t)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394

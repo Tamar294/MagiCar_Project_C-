@@ -61,13 +61,21 @@ namespace Project.Controllers
         }
 
         [HttpPut]
+<<<<<<< HEAD
         public ActionResult<CarsRental> Update([FromBody] CarsRental carsRental, int id)
+=======
+        public ActionResult<CarsRental> Update([FromBody] CarsRental carsRental)
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
         {
             if (carsRental == null)
             {
                 return NotFound();
             }
+<<<<<<< HEAD
             return carRenctalRepo.Update(carsRental, id);
+=======
+            return carRenctalRepo.Update(carsRental);
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
         }
     }
 }

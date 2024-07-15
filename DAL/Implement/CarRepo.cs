@@ -85,7 +85,11 @@ public class CarRepo : ICarRepo
         }
     }
 
+<<<<<<< HEAD
     public Car Update(Car c, int id)
+=======
+    public Car Update(Car c)
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
     {
         try
         {

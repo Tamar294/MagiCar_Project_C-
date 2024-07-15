@@ -4,10 +4,6 @@ namespace Dal.Models;
 
 public partial class MagiCarContext : DbContext
 {
-    public MagiCarContext()
-    {
-    }
-
     public MagiCarContext(DbContextOptions<MagiCarContext> options)
         : base(options)
     {
@@ -27,10 +23,13 @@ public partial class MagiCarContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+<<<<<<< HEAD
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\שנה ב\\שעורי בית\\PROJECT MEGICAR\\04.07.24\\PROJECT\\DAL\\MAGICAR.MDF\"; Integrated Security=True;Connect Timeout=30");
 
+=======
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Address>(entity =>
@@ -64,10 +63,17 @@ public partial class MagiCarContext : DbContext
                 .HasMaxLength(50);
             entity.Property(e => e.LockCode).HasColumnName("lockCode");
 
+<<<<<<< HEAD
             //entity.HasOne(d => d.AddressCodeNavigation).WithMany(p => p.Cars)
             //    .HasForeignKey(d => d.AddressCode)
             //    .OnDelete(DeleteBehavior.ClientSetNull)
             //    .HasConstraintName("FK_Cars_TO_Addresses");
+=======
+            entity.HasOne(d => d.AddressCodeNavigation).WithMany(p => p.Cars)
+                .HasForeignKey(d => d.AddressCode)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Cars_TO_Addresses");
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
 
             entity.HasOne(d => d.TypeCodeNavigation).WithMany(p => p.Cars)
                 .HasForeignKey(d => d.TypeCode)
@@ -157,10 +163,17 @@ public partial class MagiCarContext : DbContext
                 .HasMaxLength(10)
                 .IsFixedLength();
 
+<<<<<<< HEAD
             //entity.HasOne(d => d.AddressCodeNavigation).WithMany(p => p.Users)
             //    .HasForeignKey(d => d.AddressCode)
             //    .OnDelete(DeleteBehavior.ClientSetNull)
             //    .HasConstraintName("FK_Users_TO_Addresses");
+=======
+            entity.HasOne(d => d.AddressCodeNavigation).WithMany(p => p.Users)
+                .HasForeignKey(d => d.AddressCode)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Users_TO_Addresses");
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
 
             entity.HasOne(d => d.PaymentCodeNavigation).WithMany(p => p.Users)
                 .HasForeignKey(d => d.PaymentCode)

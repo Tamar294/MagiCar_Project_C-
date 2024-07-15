@@ -59,13 +59,21 @@ namespace Project.Controllers
         }
 
         [HttpPut]
+<<<<<<< HEAD
         public ActionResult<PayDetail> Update([FromBody] PayDetail payDetail, int id)
+=======
+        public ActionResult<PayDetail> Update([FromBody] PayDetail payDetail)
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
         {
             if (payDetail == null)
             {
                 return NotFound();
             }
+<<<<<<< HEAD
             return payDetailRepo.Update(payDetail, id);
+=======
+            return payDetailRepo.Update(payDetail);
+>>>>>>> 1d980016969b156c50831662286ea78b5eabb394
         }
     }
 }
