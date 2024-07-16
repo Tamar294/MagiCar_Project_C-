@@ -16,7 +16,8 @@ namespace Bl.Implement
         ITypeCarRepo typeCars;
         public TypeCarService(DalManager manager)
         {
-            this.typeCars = manager.typeCarRepo;
+            //this.typeCars = manager.typeCarRepo;
+            throw new NotImplementedException();
         }
 
         public TypeCarDTO Add(TypeCarDTO t)

@@ -16,7 +16,7 @@ namespace Bl.Implement
         PayDetailRepo creditDetails;
         public CreditDetailService(DalManager manager) 
         { 
-            this.creditDetails = manager.creditDetailRepo;
+            throw new NotImplementedException();
         }
 
         public CreditDetailDTO Add(CreditDetailDTO t)

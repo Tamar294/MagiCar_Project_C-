@@ -16,7 +16,7 @@ namespace Bl.Implement
         UserRepo users;
         public UserService(DalManager manager) 
         {
-            this.users = manager.userRepo;
+            throw new NotImplementedException();
         }
 
         public UserDTO Add(UserDTO t)

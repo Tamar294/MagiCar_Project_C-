@@ -21,11 +21,8 @@ public partial class Car
 
     public string ImageNotAvailable { get; set; }
 
-<<<<<<< HEAD
     //public virtual Address AddressCodeNavigation { get; set; }
-=======
-    public virtual Address AddressCodeNavigation { get; set; }
->>>>>>> 1d980016969b156c50831662286ea78b5eabb394
+
 
     public virtual ICollection<CarsRental> CarsRentals { get; set; } = new List<CarsRental>();
 

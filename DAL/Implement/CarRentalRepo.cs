@@ -77,11 +77,7 @@ public class CarRentalRepo: ICarRentalRepo
         }
     }
 
-<<<<<<< HEAD
     public CarsRental Update(CarsRental c, int id)
-=======
-    public CarsRental Update(CarsRental c)
->>>>>>> 1d980016969b156c50831662286ea78b5eabb394
     {
         try
         {

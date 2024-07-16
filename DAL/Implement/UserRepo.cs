@@ -77,11 +77,7 @@ namespace Dal.Implement
             }
         }
 
-<<<<<<< HEAD
         public User Update(User t, int id)
-=======
-        public User Update(User t)
->>>>>>> 1d980016969b156c50831662286ea78b5eabb394
         {
             try
             {

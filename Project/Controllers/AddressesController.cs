@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿//using Dal.Api;
+//using Dal.Api;
 //using Dal.Models;
 ////using Bl.DTO;
 //using Microsoft.AspNetCore.Http;
@@ -92,19 +91,12 @@
 
 
 
+using Bl;
 using Bl.Api;
 using Bl.DTO;
+using Bl.Implement;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-=======
-﻿using Dal.Api;
-using Dal.Models;
-//using Bl.DTO;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-//using Bl.Api;
-//using Bl.Implement;
->>>>>>> 1d980016969b156c50831662286ea78b5eabb394
 
 namespace Project.Controllers
 {
@@ -112,58 +104,27 @@ namespace Project.Controllers
     [ApiController]
     public class AddressesController : ControllerBase
     {
-<<<<<<< HEAD
-        private readonly IAddressService addressService;
-
-        public AddressesController(IAddressService addressService)
+        AddressService addressService;
+        public AddressesController(BlManager manager)
         {
-            this.addressService = addressService;
-=======
-        IAddressRepo addressRepo;
-        public AddressesController(IAddressRepo addressRepo)
-        {
-            this.addressRepo = addressRepo;
->>>>>>> 1d980016969b156c50831662286ea78b5eabb394
+            this.addressService = manager.addressService;
         }
-        //private readonly IAddressService addressService;
-        //public AddressesController(IAddressService addressService)
-        //{
-        //    this.addressService = addressService;
-        //}
 
         [HttpGet]
         public ActionResult<List<AddressDTO>> GetAll()
         {
-<<<<<<< HEAD
             var addresses = addressService.GetAll();
-=======
-            var addresses = addressRepo.GetAll();
->>>>>>> 1d980016969b156c50831662286ea78b5eabb394
             if (addresses == null)
             {
                 return NotFound();
             }
             return addresses;
         }
-        //[HttpGet]
-        //public ActionResult<List<AddressDTO>> GetAll()
-        //{
-        //    var addresses = addressService.GetAll();
-        //    if (addresses == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return addresses;
-        //}
 
         [HttpGet("{id}")]
         public ActionResult<AddressDTO> GetById(int id)
         {
-<<<<<<< HEAD
-            AddressDTO address = addressService.GetByID(id);
-=======
-            Address address = addressRepo.GetById(id);
->>>>>>> 1d980016969b156c50831662286ea78b5eabb394
+            AddressDTO address = addressService.GetById(id);
             if (address == null)
             {
                 return NotFound();
@@ -172,66 +133,39 @@ namespace Project.Controllers
         }
 
         [HttpPost]
-<<<<<<< HEAD
-        public ActionResult<AddressDTO> Post([FromBody] AddressDTO addressDTO)
-=======
-        public ActionResult<Address> Post([FromBody] Address address)
->>>>>>> 1d980016969b156c50831662286ea78b5eabb394
+        public ActionResult<AddressDTO> Post([FromBody] AddressDTO add)
         {
-            if (addressDTO == null)
+            if (add == null)
             {
-                return BadRequest();
+                return NotFound();
             }
-<<<<<<< HEAD
-            var addedAddress = addressService.Add(addressDTO);
-            if (addedAddress == null)
-            {
-                return StatusCode(500, "A problem happened while handling your request.");
-            }
-            return CreatedAtAction(nameof(GetById), new { id = addedAddress.Id }, addedAddress);
-=======
-            return addressRepo.Add(address);
->>>>>>> 1d980016969b156c50831662286ea78b5eabb394
+            return addressService.Add(add);
         }
 
         [HttpDelete("{id}")]
         public ActionResult<AddressDTO> Delete(int id)
         {
-<<<<<<< HEAD
             var deletedAddress = addressService.Delete(id);
             if (deletedAddress == null)
-=======
-            var delete = addressRepo.Delete(id);
-            if (delete == null)
->>>>>>> 1d980016969b156c50831662286ea78b5eabb394
             {
                 return NotFound();
             }
             return deletedAddress;
         }
 
-<<<<<<< HEAD
         [HttpPut("{id}")]
-        public ActionResult<AddressDTO> Update(int id, [FromBody] AddressDTO addressDTO)
-=======
-        [HttpPut]
-        public ActionResult<Address> Update([FromBody] Address address)
->>>>>>> 1d980016969b156c50831662286ea78b5eabb394
+        public ActionResult<AddressDTO> Update(int id, [FromBody] AddressDTO add)
         {
-            if (addressDTO == null)
+            if (id != add.Id)
             {
-                return BadRequest();
+                return NotFound();
             }
-<<<<<<< HEAD
-            var updatedAddress = addressService.Update(id, addressDTO);
+            var updatedAddress = addressService.Update(add, id);
             if (updatedAddress == null)
             {
-                return StatusCode(500, "A problem happened while handling your request.");
+                return NotFound();
             }
             return updatedAddress;
-=======
-            return addressRepo.Update(address);
->>>>>>> 1d980016969b156c50831662286ea78b5eabb394
         }
     }
 }

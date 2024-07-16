@@ -1,46 +1,43 @@
-using Dal.Api;
+using Bl;
+using Bl.Api;
+using Bl.Implement;
 using Dal.Models;
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
-using Dal.Implement;
-<<<<<<< HEAD
 using System.Diagnostics;
-=======
->>>>>>> 1d980016969b156c50831662286ea78b5eabb394
-//using Bl.Api;
-//using Bl.Implement;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
-Console.WriteLine("hi");
-Debug.WriteLine("hi debug");
-Console.WriteLine(configuration["ConnectionStrings:MagiCarDB"]);
-Debug.WriteLine(configuration["ConnectionStrings:MagiCarDB"]);
 
 builder.Services.AddControllers();
-
-
 
 builder.Services.AddDbContext<MagiCarContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MagiCarDB"))
 );
+
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("CORSPolicy", builder =>
+//    {
+//        builder.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
+//    });
+//});
+
 DBActions actions = new DBActions(builder.Configuration);
 var connString = actions.GetConnectionString("MagiCarDB");
-Console.WriteLine("Final Connection String: " + connString);
-Debug.WriteLine("Final Connection String: " + connString);
 builder.Services.AddDbContext<MagiCarContext>((options) => options.UseSqlServer(connString));
 
-builder.Services.AddScoped<IAddressRepo, AddressRepo>();
+builder.Services.AddScoped(b => new BlManager(connString));
+
 //builder.Services.AddScoped<IAddressService, AddressService>();
-builder.Services.AddScoped<ICarRepo, CarRepo>();
-builder.Services.AddScoped<ICarRentalRepo, CarRentalRepo>();
-builder.Services.AddScoped<IPayDetailRepo, PayDetailRepo>();
-builder.Services.AddScoped<IRentalHistoryRepo, RentalHistoryRepo>();
-builder.Services.AddScoped<ITypeCarRepo, TypeCarRepo>();
-builder.Services.AddScoped<IUserRepo, UserRepo>();
+
 
 var app = builder.Build();
-
+//app.UseCors("CORSPolicy");
 app.MapGet("/", () => "Hello World!");
 app.MapControllers();
 app.Run();
+
+
+
+

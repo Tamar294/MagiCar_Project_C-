@@ -77,11 +77,7 @@ namespace Dal.Implement
             }
         }
 
-<<<<<<< HEAD
         public RentalHistory Update(RentalHistory r, int id)
-=======
-        public RentalHistory Update(RentalHistory r)
->>>>>>> 1d980016969b156c50831662286ea78b5eabb394
         {
             try
             {

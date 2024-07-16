@@ -1,4 +1,5 @@
 ﻿using Bl.DTO;
+using Dal.Api;
 using Dal.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bl.Api
 {
-    public interface IAddressService : IService<AddressDTO>
+    public interface IAddressService : IRepository<AddressDTO>
     {
     }
 }

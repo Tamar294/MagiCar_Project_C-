@@ -15,15 +15,15 @@ namespace Bl.DTO
         {
         }
 
-        public AddressDTO(int Id, string City, string Neighborhood, string Street, int BuildingNumber , ICollection<Car> Cars, ICollection<User> Users)
+        public AddressDTO(int Id, string City, string Neighborhood, string Street, int BuildingNumber)
         {
             this.Id = Id;   
             this.City = City;
             this.Neighborhood = Neighborhood;
             this.Street = Street;
             this.BuildingNumber = BuildingNumber;
-            this.Cars = Cars;
-            this.Users = Users;
+            //this.Cars = Cars;
+            //this.Users = Users;
         }
         public int Id { get; set; }
 

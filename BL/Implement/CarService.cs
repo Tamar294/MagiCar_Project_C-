@@ -16,7 +16,8 @@ namespace Bl.Implement
         CarRepo cars;
         public CarService(DalManager manager) 
         {
-            this.cars = manager.carRepo;        
+            //this.cars = manager.carRepo;
+            throw new NotImplementedException();
         }
 
         public CarDTO Add(CarDTO t)
