@@ -11,7 +11,7 @@ namespace Bl.DTO
 {
     public class AddressDTO
     {
-        public AddressDTO(Address address)
+        public AddressDTO()
         {
         }
 

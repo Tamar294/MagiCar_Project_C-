@@ -59,27 +59,59 @@
 //}
 
 
+//using Dal.Api;
+//using Dal.Implement;
+//using Dal.Models;
+//using Microsoft.Extensions.DependencyInjection;
+
+//namespace Dal
+//{
+//    public class DalManager
+//    {
+//        public AddressRepo address;
+
+//        public DalManager(string connString)
+//        {
+//            ServiceCollection services = new();
+
+//            // Register DbContext and other repositories
+//            services.AddDbContext<MagiCarContext>();
+//            services.AddScoped<IRepository<Address>, AddressRepo>(); // Ensure this line is present
+
+//            ServiceProvider serviceProvider = services.BuildServiceProvider();
+//            address = serviceProvider.GetRequiredService<AddressRepo>();
+//        }
+//    }
+//}
+
+
+
+
 using Dal.Api;
 using Dal.Implement;
 using Dal.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Dal
 {
     public class DalManager
     {
-        public AddressRepo address;
+        public IAddressRepo AddressRepo { get; private set; }
 
         public DalManager(string connString)
         {
             ServiceCollection services = new();
 
-            // Register DbContext and other repositories
-            services.AddDbContext<MagiCarContext>();
-            services.AddScoped<IRepository<Address>, AddressRepo>(); // Ensure this line is present
+            // Register DbContext with connection string
+            services.AddDbContext<MagiCarContext>(options =>
+                options.UseSqlServer(connString)); // התאמת `UseSqlServer` או המתודה המתאימה
+
+            // Register repositories
+            services.AddScoped<IAddressRepo, AddressRepo>();
 
             ServiceProvider serviceProvider = services.BuildServiceProvider();
-            address = serviceProvider.GetRequiredService<AddressRepo>();
+            AddressRepo = serviceProvider.GetRequiredService<IAddressRepo>();
         }
     }
 }

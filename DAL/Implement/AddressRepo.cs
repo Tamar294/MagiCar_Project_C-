@@ -77,21 +77,24 @@ public class AddressRepo : IAddressRepo
         }
     }
 
-
-    public Address Update(Address a, int id) { 
+    public Address Update(Address updatedAddress, int id)
+    {
         try
         {
-            Address address = context.Addresses.FirstOrDefault(address => address.Id == a.Id);
-            if (address != null)
+            var existingAddress = context.Addresses.FirstOrDefault(address => address.Id == id);
+            if (existingAddress == null)
             {
-                a.City = address.City;
-                a.Neighborhood = address.Neighborhood;
-                a.Street = address.Street;
-                a.BuildingNumber = address.BuildingNumber;
+                return null; // מחזיר null אם האובייקט לא נמצא
             }
-            context.SaveChanges();
-            return a;
 
+            // עדכון הערכים באובייקט הקיים
+            existingAddress.City = updatedAddress.City;
+            existingAddress.Neighborhood = updatedAddress.Neighborhood;
+            existingAddress.Street = updatedAddress.Street;
+            existingAddress.BuildingNumber = updatedAddress.BuildingNumber;
+
+            context.SaveChanges();
+            return existingAddress;
         }
         catch (Exception ex)
         {
@@ -99,4 +102,28 @@ public class AddressRepo : IAddressRepo
             throw new Exception("Failed to update the address🙁.");
         }
     }
+
+
+
+    //public Address Update(Address a, int id) { 
+    //    try
+    //    {
+    //        Address address = context.Addresses.FirstOrDefault(address => address.Id == a.Id);
+    //        if (address != null)
+    //        {
+    //            a.City = address.City;
+    //            a.Neighborhood = address.Neighborhood;
+    //            a.Street = address.Street;
+    //            a.BuildingNumber = address.BuildingNumber;
+    //        }
+    //        context.SaveChanges();
+    //        return a;
+
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Debug.WriteLine(ex.ToString());
+    //        throw new Exception("Failed to update the address🙁.");
+    //    }
+    //}
 }

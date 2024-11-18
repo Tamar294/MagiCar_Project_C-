@@ -1,43 +1,33 @@
-using Bl;
 using Bl.Api;
 using Bl.Implement;
+using Dal;
 using Dal.Models;
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
-var configuration = builder.Configuration;
 
+// Add controllers
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<MagiCarContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MagiCarDB"))
-);
-
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("CORSPolicy", builder =>
-//    {
-//        builder.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
-//    });
-//});
-
+// Get connection string and register DbContext
 DBActions actions = new DBActions(builder.Configuration);
 var connString = actions.GetConnectionString("MagiCarDB");
 builder.Services.AddDbContext<MagiCarContext>((options) => options.UseSqlServer(connString));
 
-builder.Services.AddScoped(b => new BlManager(connString));
+// Register DalManager as a Singleton
+builder.Services.AddSingleton<DalManager>(provider =>
+{
+    return new DalManager(connString); // יוצר את DalManager עם חיבור ל-DB
+});
 
-//builder.Services.AddScoped<IAddressService, AddressService>();
-
+// Register BL services (BL depends on DAL internally)
+builder.Services.AddScoped<IAddressService, AddressService>();
 
 var app = builder.Build();
-//app.UseCors("CORSPolicy");
+
+// Map default route and controllers
 app.MapGet("/", () => "Hello World!");
 app.MapControllers();
+
 app.Run();
-
-
-
-
